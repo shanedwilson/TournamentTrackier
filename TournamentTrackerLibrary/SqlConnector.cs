@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TrackerLibrary
 {
-    class SqlConnector : IDataConnection
+    public class SqlConnector : IDataConnection
     {
         public PrizeModel CreatePrize(PrizeModel model)
         {
