@@ -61,15 +61,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CreatePrizeForm.cs" />
+    <Compile Include="CreatePrizeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="CreatePrizeForm.Designer.cs">
       <DependentUpon>CreatePrizeForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="CreateTeamForm.cs" />
+    <Compile Include="CreateTeamForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="CreateTeamForm.Designer.cs">
       <DependentUpon>CreateTeamForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="CreateTournamentForm.cs" />
+    <Compile Include="CreateTournamentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="CreateTournamentForm.Designer.cs">
       <DependentUpon>CreateTournamentForm.cs</DependentUpon>
     </Compile>
@@ -79,7 +85,9 @@
     <Compile Include="TournamentDashboardForm.Designer.cs">
       <DependentUpon>TournamentDashboardForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="TournamentViewerForm.cs" />
+    <Compile Include="TournamentViewerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="TournamentViewerForm.Designer.cs">
       <DependentUpon>TournamentViewerForm.cs</DependentUpon>
     </Compile>
@@ -133,6 +141,12 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TournamentTrackerLibrary\TournamentTrackerLibrary.csproj">
+      <Project>{3aa44e94-e984-4774-ae39-2c118f37d770}</Project>
+      <Name>TournamentTrackerLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
