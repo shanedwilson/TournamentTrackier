@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using TrackerLibrary.Models;
+using TournamentTrackerLibrary.DataAccess.TextHelpers;
 
 namespace TrackerLibrary.DataAccess
 {
