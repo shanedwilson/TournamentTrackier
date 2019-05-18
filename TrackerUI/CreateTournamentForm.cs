@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TournamentTrackerLibrary;
 using TrackerLibrary;
 using TrackerLibrary.Models;
 
@@ -74,6 +75,8 @@ namespace TrackerUI
             tm.EntryFee = fee;
             tm.Prizes = selectedPrizes;
             tm.Teams = selectedTeams;
+
+            TournamentLogic.CreateRounds(tm);
 
             GlobalConfig.Connection.CreateTournament(tm);
         }
