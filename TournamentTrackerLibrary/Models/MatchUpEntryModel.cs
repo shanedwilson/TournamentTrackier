@@ -9,6 +9,6 @@ namespace TrackerLibrary.Models
         public int Id { get; set; }
         public TeamModel TeamCompeting { get; set; }
         public Double Score { get; set; }
-        public MatchUpModel ParentMatchUp { get; set; }
+        public MatchUpModel ParentMatchup { get; set; }
     }
 }

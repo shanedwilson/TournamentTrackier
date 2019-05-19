@@ -31,11 +31,11 @@ namespace TournamentTrackerLibrary
             {
                 foreach(MatchUpModel match in previousRound)
                 {
-                    currMatchup.Entries.Add(new MatchUpEntryModel { ParentMatchUp = match });
+                    currMatchup.Entries.Add(new MatchUpEntryModel { ParentMatchup = match });
 
                     if (currMatchup.Entries.Count > 1)
                     {
-                        currMatchup.MatchUpRound = round;
+                        currMatchup.MatchupRound = round;
                         currRound.Add(currMatchup);
                         currMatchup = new MatchUpModel();
                     }
@@ -58,7 +58,7 @@ namespace TournamentTrackerLibrary
 
                 if (byes > 0 || curr.Entries.Count > 1)
                 {
-                    curr.MatchUpRound = 1;
+                    curr.MatchupRound = 1;
                     output.Add(curr);
                     curr = new MatchUpModel();
                     
