@@ -41,6 +41,8 @@ namespace TournamentTrackerLibrary
                     }
                 }
                 model.Rounds.Add(currRound);
+                previousRound = currRound;
+                currRound = new List<MatchUpModel>();
                 round += 1;
             }
         }
