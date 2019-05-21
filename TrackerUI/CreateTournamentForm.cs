@@ -67,6 +67,7 @@ namespace TrackerUI
                 MessageBox.Show("Please enter a valid entry fee.", "Invalid fee.",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
+                return;
             }
 
             TournamentModel tm = new TournamentModel();

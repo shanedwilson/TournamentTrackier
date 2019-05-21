@@ -203,5 +203,81 @@ namespace TrackerLibrary.DataAccess
             }
             return output;
         }
+
+        public List<TournamentModel> GetTournaments_All()
+        {
+            List<TournamentModel> output;
+
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.CnnString(db)))
+            {
+                output = connection.Query<TournamentModel>("dbo.spTournaments_GetAll").ToList();
+
+                foreach (TournamentModel tm in output)
+                {
+                    var para = new DynamicParameters();
+                    para.Add("@TournamentId", tm.Id);
+
+                    tm.Prizes = connection.Query<PrizeModel>("dbo.spPrizes_GetByTournament", para, commandType: CommandType.StoredProcedure).ToList();
+
+                    para = new DynamicParameters();
+                    para.Add("@TournamentId", tm.Id);
+                    tm.Teams = connection.Query<TeamModel>("dbo.spTeam_GetByTournament",  para, commandType: CommandType.StoredProcedure).ToList();
+
+                    foreach (TeamModel t in tm.Teams)
+                    {
+                        var p = new DynamicParameters();
+                        p.Add("@TeamId", t.Id);
+                        t.TeamMembers = connection.Query<PersonModel>("dbo.spTeamMembers_GetByTeam", p, commandType: CommandType.StoredProcedure).ToList();
+                    }
+
+                    var param = new DynamicParameters();
+                    param.Add("@tournamentId", tm.Id);
+
+                    List<MatchUpModel> matchUps = connection.Query<MatchUpModel>("dbo.spMatchups_GetByTournament", param, commandType: CommandType.StoredProcedure).ToList();
+
+                    foreach(MatchUpModel matchUp in matchUps)
+                    {
+                        var p = new DynamicParameters();
+                        p.Add("@matchUpId", matchUp.Id);
+
+                        matchUp.Entries = connection.Query<MatchUpEntryModel>("dbo.spMatchupEntries_GetByMatchup", p, commandType: CommandType.StoredProcedure).ToList();
+
+                        List<TeamModel> allTeams = GetTeam_All();
+
+                        if(matchUp.WinnerId > 0)
+                        {
+                            matchUp.Winner = allTeams.Where(x => x.Id == matchUp.WinnerId).First();
+                        }
+
+                        foreach(var entry in matchUp.Entries)
+                        {
+                            if(entry.TeamCompetingId > 0)
+                            {
+                                entry.TeamCompeting = allTeams.Where(x => x.Id == entry.TeamCompetingId).First();
+                            }
+
+                            if(entry.ParentMatchupId > 0)
+                            {
+                                entry.ParentMatchup = matchUps.Where(x => x.Id == entry.ParentMatchupId).First();
+                            }
+                        }
+                    }
+                    List<MatchUpModel> currentRow = new List<MatchUpModel>();
+                    int currentRound = 1;
+                    foreach (MatchUpModel matchUp in matchUps)
+                    {
+                        if(matchUp.MatchupRound > currentRound)
+                        {
+                            tm.Rounds.Add(currentRow);
+                            currentRow = new List<MatchUpModel>();
+                            currentRound += 1;
+                        }
+                        currentRow.Add(matchUp);
+                    }
+                    tm.Rounds.Add(currentRow);
+                }
+            }
+            return output;
+        }
     }
 }
