@@ -27,9 +27,9 @@ namespace TournamentTrackerLibrary
             List<MatchUpModel> currRound = new List<MatchUpModel>();
             MatchUpModel currMatchup = new MatchUpModel();
 
-            while(round <= rounds)
+            while (round <= rounds)
             {
-                foreach(MatchUpModel match in previousRound)
+                foreach (MatchUpModel match in previousRound)
                 {
                     currMatchup.Entries.Add(new MatchUpEntryModel { ParentMatchup = match });
 
@@ -40,8 +40,10 @@ namespace TournamentTrackerLibrary
                         currMatchup = new MatchUpModel();
                     }
                 }
+
                 model.Rounds.Add(currRound);
                 previousRound = currRound;
+
                 currRound = new List<MatchUpModel>();
                 round += 1;
             }

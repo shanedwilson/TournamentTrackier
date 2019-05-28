@@ -19,14 +19,23 @@ namespace TrackerLibrary.Models
 
                 foreach(MatchUpEntryModel me in Entries)
                 {
-                    if (output.Length == 0)
+                    if (me.TeamCompeting != null)
                     {
-                        output = me.TeamCompeting.TeamName;
+                        if (output.Length == 0)
+                        {
+                            output = me.TeamCompeting.TeamName;
+                        }
+                        else
+                        {
+                            output += $" vs. {me.TeamCompeting.TeamName}";
+                        }
                     }
                     else
                     {
-                        output += $" vs. {me.TeamCompeting.TeamName}";
+                        output = "MatchUp Not Yet Determined.";
+                        break;
                     }
+
                 }
                 return output;
             }

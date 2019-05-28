@@ -33,11 +33,14 @@ namespace TrackerUI
             tournamentName.Text = tournament.TournamentName;
         }
 
-        private void WireUpLists()
+        private void WireUpRoundsLists()
         {
             roundDropdown.DataSource = null;
             roundDropdown.DataSource = rounds;
+        }
 
+        private void WireUpMatchUpsLists()
+        {
             matchupListbox.DataSource = null;
             matchupListbox.DataSource = selectedMatchups;
             matchupListbox.DisplayMember = "DisplayName";
@@ -57,7 +60,7 @@ namespace TrackerUI
                     rounds.Add(currRound);
                 }
             }
-            WireUpLists();
+            WireUpRoundsLists();
         }
 
         private void TournamentViewerForm_Load(object sender, EventArgs e)
@@ -101,7 +104,7 @@ namespace TrackerUI
                     selectedMatchups = matchups;
                 }
             }
-            WireUpLists();   
+            WireUpMatchUpsLists();   
         }
     }
 }
