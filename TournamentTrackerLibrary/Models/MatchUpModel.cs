@@ -32,7 +32,7 @@ namespace TrackerLibrary.Models
                     }
                     else
                     {
-                        output = "MatchUp Not Yet Determined.";
+                        output = "Matchup Not Yet Determined.";
                         break;
                     }
 

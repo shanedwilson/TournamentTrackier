@@ -127,54 +127,6 @@ namespace TrackerLibrary.DataAccess
 
         }
 
-        //private void SaveTournamentRounds(IDbConnection connection, TournamentModel model)
-        //{
-        //    foreach (List<MatchUpModel> round in model.Rounds)
-        //        {
-        //            foreach (MatchUpModel matchUp in round)
-        //        {
-        //            var p = new DynamicParameters();
-        //            p.Add("@TournamentId", model.Id);
-        //            p.Add("@MatchupRound", matchUp.MatchupRound);
-        //            p.Add("@id", 0, dbType: DbType.Int32, direction: ParameterDirection.Output);
-
-        //            connection.Execute("dbo.spMatchups_Insert", p, commandType: CommandType.StoredProcedure);
-
-        //            matchUp.Id = p.Get<int>("@id");
-
-        //            foreach (MatchUpEntryModel entry in matchUp.Entries)
-        //            {
-        //                p = new DynamicParameters();
-        //                p.Add("@MatchupId", matchUp.Id);
-
-        //                if (entry.ParentMatchup == null)
-        //                {
-        //                    p.Add("@ParentMatchupId", null);
-        //                }
-        //                else
-        //                {
-        //                    p.Add("@ParentMatchupId", entry.ParentMatchup.Id);
-        //                }
-
-        //                if (entry.TeamCompeting == null)
-        //                {
-        //                    p.Add("@TeamCompetingId", null);
-        //                }
-        //                else
-        //                {
-        //                    p.Add("@TeamCompetingId", entry.TeamCompeting.Id);
-        //                }
-
-        //                p.Add("@id", 0, dbType: DbType.Int32, direction: ParameterDirection.Output);
-
-        //                connection.Execute("dbo.spMatchupEntries_Insert", p, commandType: CommandType.StoredProcedure);
-
-        //                matchUp.Id = p.Get<int>("@id");
-        //            }
-        //        }
-        //    }
-        //}
-
         private void SaveTournamentRounds(IDbConnection connection, TournamentModel model)
         {
             foreach (List<MatchUpModel> round in model.Rounds)
