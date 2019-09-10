@@ -175,12 +175,11 @@ namespace TrackerUI
                     {
                         teamOneName.Text = m.Entries[0].TeamCompeting.TeamName;
 
-                        double scoreVal = 0;
                         bool scoreValid = double.TryParse(teamOneScoreValue.Text, out teamOneScore);
 
                         if (scoreValid)
                         {
-                            m.Entries[0].Score = double.Parse(teamOneScoreValue.Text);
+                            m.Entries[0].Score = teamOneScore;
                         }
                         else
                         {
@@ -193,12 +192,11 @@ namespace TrackerUI
                 {
                     if (m.Entries[1].TeamCompeting != null)
                     {
-                        double scoreVal = 0;
                         bool scoreValid = double.TryParse(teamTwoScoreValue.Text, out teamTwoScore);
 
                         if (scoreValid)
                         {
-                            m.Entries[1].Score = scoreVal;
+                            m.Entries[1].Score = teamTwoScore;
                         }
                         else
                         {
