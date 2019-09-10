@@ -121,6 +121,7 @@
             this.teamOneName.Size = new System.Drawing.Size(254, 54);
             this.teamOneName.TabIndex = 6;
             this.teamOneName.Text = "<Team One>";
+            this.teamOneName.Click += new System.EventHandler(this.teamOneName_Click);
             // 
             // teamOneScoreLabel
             // 

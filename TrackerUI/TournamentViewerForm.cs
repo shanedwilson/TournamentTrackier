@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TrackerLibrary;
 using TrackerLibrary.Models;
 
 namespace TrackerUI
@@ -110,6 +111,21 @@ namespace TrackerUI
             {
                 LoadMatchup(selectedMatchups.First());
             }
+            DisplayMatchupInfo();
+        }
+
+        private void DisplayMatchupInfo()
+        {
+            bool isVisible = (selectedMatchups.Count > 0);
+
+            teamOneName.Visible = isVisible;
+            teamOneScoreLabel.Visible = isVisible;
+            teamOneScoreValue.Visible = isVisible;
+            teamTwoName.Visible = isVisible;
+            teamTwoScoreLabel.Visible = isVisible;
+            teamTwoScoreValue.Visible = isVisible;
+            versusLabel.Visible = isVisible;
+            scoreButton.Visible = isVisible;
         }
 
         private void LoadMatchup(MatchUpModel m)
@@ -218,6 +234,32 @@ namespace TrackerUI
             {
                 MessageBox.Show("I do not handle ties.");
             }
+
+            foreach (List<MatchUpModel> round in tournament.Rounds)
+            {
+                foreach (MatchUpModel rm in round)
+                {
+                    foreach (MatchUpEntryModel me in rm.Entries)
+                    {
+                        if(me.ParentMatchup != null)
+                        {
+                            if (me.ParentMatchup.Id == m.Id)
+                            {
+                                me.TeamCompeting = m.Winner;
+                                GlobalConfig.Connection.UpdateMatchup(rm);
+                            }
+                        }
+                    }
+                }
+            }
+            LoadMatchups((int)roundDropdown.SelectedItem);
+
+            GlobalConfig.Connection.UpdateMatchup(m);
+        }
+
+        private void teamOneName_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
