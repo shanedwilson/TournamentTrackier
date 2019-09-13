@@ -271,6 +271,7 @@ namespace TrackerUI
             {
 
                 MessageBox.Show($"THe application had the following error: {ex.Message}");
+                return;
             }
             LoadMatchups((int)roundDropdown.SelectedItem);
         }
