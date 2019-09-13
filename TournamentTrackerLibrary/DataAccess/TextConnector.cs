@@ -4,6 +4,7 @@ using System.Text;
 using TrackerLibrary.Models;
 using TournamentTrackerLibrary.DataAccess.TextHelpers;
 using System.Linq;
+using TournamentTrackerLibrary;
 
 namespace TrackerLibrary.DataAccess
 {
@@ -84,6 +85,9 @@ namespace TrackerLibrary.DataAccess
             tournaments.Add(model);
 
             tournaments.SaveToTournamentFile();
+
+            TournamentLogic.UpdateTournamentResults(model);
+
         }
 
         public List<PersonModel> GetPerson_All()

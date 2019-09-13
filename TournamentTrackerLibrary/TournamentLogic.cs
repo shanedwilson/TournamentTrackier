@@ -20,8 +20,6 @@ namespace TournamentTrackerLibrary
             model.Rounds.Add(CreateFirstRound(byes, randomizedTeams));
 
             CreateOtherRounds(model, rounds);
-
-            UpdateTournamentResults(model);
         }
 
         public static void UpdateTournamentResults(TournamentModel model)
@@ -76,7 +74,7 @@ namespace TournamentTrackerLibrary
 
             foreach (MatchUpModel m in models)
             {
-                if(m.Entries.Count ==1)
+                if(m.Entries.Count == 1)
                 {
                     m.Winner = m.Entries[0].TeamCompeting;
                     continue;

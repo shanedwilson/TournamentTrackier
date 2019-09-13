@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
+using TournamentTrackerLibrary;
 using TrackerLibrary.Models;
 
 namespace TrackerLibrary.DataAccess
@@ -79,6 +80,8 @@ namespace TrackerLibrary.DataAccess
                 SaveTournamentEntries(connection, model);
 
                 SaveTournamentRounds(connection, model);
+
+                TournamentLogic.UpdateTournamentResults(model);
             };
         }
 
