@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TournamentTrackerLibrary;
 using TrackerLibrary;
 using TrackerLibrary.Models;
 
@@ -222,39 +223,9 @@ namespace TrackerUI
                     }
                 }
             }
-            if (teamOneScore > teamTwoScore)
-            {
-                m.Winner = m.Entries[0].TeamCompeting;
-            }
-            else if (teamTwoScore > teamOneScore)
-            {
-                m.Winner = m.Entries[1].TeamCompeting;
-            }
-            else
-            {
-                MessageBox.Show("I do not handle ties.");
-            }
+            TournamentLogic.UpdateTournamentResults(tournament);
 
-            foreach (List<MatchUpModel> round in tournament.Rounds)
-            {
-                foreach (MatchUpModel rm in round)
-                {
-                    foreach (MatchUpEntryModel me in rm.Entries)
-                    {
-                        if(me.ParentMatchup != null)
-                        {
-                            if (me.ParentMatchup.Id == m.Id)
-                            {
-                                me.TeamCompeting = m.Winner;
-                                GlobalConfig.Connection.UpdateMatchup(rm);
-                            }
-                        }
-                    }
-                }
-            }
             LoadMatchups((int)roundDropdown.SelectedItem);
-
-            GlobalConfig.Connection.UpdateMatchup(m);
         }
 
         private void teamOneName_Click(object sender, EventArgs e)
