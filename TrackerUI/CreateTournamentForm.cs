@@ -80,6 +80,10 @@ namespace TrackerUI
             TournamentLogic.CreateRounds(tm);
 
             GlobalConfig.Connection.CreateTournament(tm);
+
+            TournamentViewerForm frm = new TournamentViewerForm(tm);
+            frm.Show();
+            this.Close();
         }
 
         private void addTeamButton_Click(object sender, EventArgs e)
